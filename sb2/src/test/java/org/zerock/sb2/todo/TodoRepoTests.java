@@ -1,13 +1,12 @@
 package org.zerock.sb2.todo;
 
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +20,11 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Transactional
 public class TodoRepoTests {
+  
   @Autowired(required = false)
   private TodoRepository repository;
+
+
   //gradlew build -x test
   //@Disabled
   @Test
@@ -36,8 +38,6 @@ public class TodoRepoTests {
 
     repository.save(todo);
 
-    log.info("=========================");
-    log.info(todo.getTno());
 
   }
 
@@ -68,6 +68,7 @@ public class TodoRepoTests {
     Todo todo = result.get();
 
     todo.changeTitle("Changed Title 234----1");
+
   }
 
   @Test
