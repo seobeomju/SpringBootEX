@@ -1,15 +1,13 @@
 package org.zerock.sb2.todo;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
-import org.springframework.transaction.annotation.Transactional;
 import org.zerock.sb2.todo.entities.Todo;
 import org.zerock.sb2.todo.repository.TodoRepository;
 
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 
 @SpringBootTest
@@ -20,13 +18,9 @@ public class TodoRepoTests {
   @Autowired(required = false)
   private TodoRepository repository;
 
-
-  //gradlew build -x test
-  //@Disabled
-  @Test
-  @Commit
-  public void testInsert(){
-    //insert는 save( )하시면 끝 
+    @Test
+    public void testInsert(){
+        //insert는 save()하시면 끝
 
     for(int i = 0; i < 50 ; i++){
       Todo todo = Todo.builder()
@@ -36,7 +30,7 @@ public class TodoRepoTests {
 
       repository.save(todo);
     }
-  }
+}
 
   @Test
   public void testRead(){
