@@ -14,7 +14,7 @@ import lombok.ToString;
 
 //테이블 용도 
 //@Table 생략시에는 클래스 이름이 테이블 이름 
-@Entity(name = "todo")
+@Entity
 @Table(name = "tbl_todo")
 @Builder
 @AllArgsConstructor
