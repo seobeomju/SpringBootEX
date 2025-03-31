@@ -30,5 +30,9 @@ public class Todo {
 
     private String writer;
 
-
+    //JPA는 가능하면 엔티티 객체를 readonly로 하는 것을 권장
+    //변경하고 싶을때는 setxxx가 아니라 별도의 메서드를 이용함 (필수는 아님)
+    public void changeTitle(String title){
+        this.title = title;
+    }
 }
