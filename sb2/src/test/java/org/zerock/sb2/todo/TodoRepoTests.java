@@ -3,6 +3,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.zerock.sb2.todo.entities.Todo;
 import org.zerock.sb2.todo.repository.TodoRepository;
 
@@ -62,6 +66,16 @@ public class TodoRepoTests {
 
   }
 
+ @Test
+ public void testList(){
+    org.springframework.data.domain.Pageable pageable
+    =PageRequest.of(0,10,Sort.by("tno").descending());
 
+    Page<Todo> result = repository.findAll(pageable);
+    log.info("-----------------");
+    log.info(result.getTotalElements());
+    log.info(result.getNumber());
+    log.info(result.getSize());
+ }
 
 }
