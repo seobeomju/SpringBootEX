@@ -21,8 +21,8 @@
     </ul>
 
     <ul>
-        <th:block th:each="str : ${list}">
-        <li>AAAA [[${str}]]</li>
+        <th:block th:each="str, status : ${list}">
+        <li>AAAA [[${str}]] [[${status.index}]] [[${status.size}]]</li>
     </th:block>
     </ul>
 </body>
