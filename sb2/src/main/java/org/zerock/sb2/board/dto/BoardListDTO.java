@@ -3,7 +3,7 @@ package org.zerock.sb2.board.dto;
 import java.time.LocalDateTime;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Data
 public class BoardListDTO {
