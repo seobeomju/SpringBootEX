@@ -48,4 +48,8 @@ public class SampleController {
     model.addAttribute("list", arr);
     model.addAttribute("voList", voList);
   }
+  @GetMapping("ex2")
+  public void ex2(){
+    
+  }
 }
