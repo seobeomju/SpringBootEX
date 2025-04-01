@@ -36,6 +36,13 @@ public class TodoRepoTests {
   private JPAQueryFactory queryFactory;
 
   @Test
+  public void testSearch1(){
+    Pageable pageable = PageRequest.of(0,10);
+    repository.list1(pageable);
+  }
+
+
+  @Test
   public void testQuery(){
     log.info(queryFactory);
 
@@ -57,9 +64,6 @@ public class TodoRepoTests {
     log.info(entityList);
     log.info(count);
   }
-
-
-
 
   //gradlew build -x test
   //@Disabled
