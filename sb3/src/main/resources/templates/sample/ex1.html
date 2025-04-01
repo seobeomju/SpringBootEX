@@ -9,5 +9,21 @@
     <h1>Sample / ex1</h1>
 
     <h1 th:text="${'AAAAA'}">AAAAAAAAAAA</h1>
+
+    <p>[[${list}]]</p>
+
+    <div th:with="num1 = ${list[0]}, num2 = ${list[1]}">
+        <p>[[${num1+num2}]]</p>
+    </div>
+
+    <ul>
+        <li th:each="str : ${list}">[[${str}]]</li>
+    </ul>
+
+    <ul>
+        <th:block th:each="str : ${list}">
+        <li>AAAA [[${str}]]</li>
+    </th:block>
+    </ul>
 </body>
 </html>
