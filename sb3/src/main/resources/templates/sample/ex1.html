@@ -54,6 +54,14 @@
                     <h1 class="mt-4">
                         <a th:href="@{/hello(name='홍길동' , age=16, desf='한양',page=1)}">Simple Sidebar</a>
                     </h1>
+                    <ul>
+                        <li th:each="str, status : ${list}">
+                            <p th:if="${status.index % 2 ==1}">ODD</p>
+                            <p th:unless="${status.index %2 ==1}">EVEN</p>   
+                        </li>
+                    </ul>
+
+                    
                     <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
                     <p>
                         Make sure to keep all page content within the
