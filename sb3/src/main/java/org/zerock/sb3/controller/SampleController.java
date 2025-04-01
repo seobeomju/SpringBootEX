@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
 @Controller
 @RequestMapping("/sample")
 public class SampleController {
@@ -50,6 +51,6 @@ public class SampleController {
   }
   @GetMapping("ex2")
   public void ex2(){
-    
+
   }
 }
