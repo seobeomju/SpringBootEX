@@ -19,7 +19,9 @@ public class BoardRepoTests {
   @Test
   public void testList(){
     PageRequestDTO pageRequestDTO = new PageRequestDTO();
-    repository.list(pageRequestDTO);
+    pageRequestDTO.setType("TCW");
+    pageRequestDTO.setKeyword("11");
+    log.info(repository.list(pageRequestDTO));
   }
   @Test
   public void testInsert(){
