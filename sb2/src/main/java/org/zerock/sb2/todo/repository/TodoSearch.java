@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.zerock.sb2.todo.entities.Todo;
 
 public interface TodoSearch {
-    List<Todo> list1(Pageable pageable);
-    
-}
+
+  List<Todo> list1(Pageable pageable);
+  
+} 

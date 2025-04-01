@@ -5,5 +5,7 @@ import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.board.dto.PageResponseDTO;
 
 public interface BoardSearch {
-    PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO);
+
+  PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO);
+  
 }

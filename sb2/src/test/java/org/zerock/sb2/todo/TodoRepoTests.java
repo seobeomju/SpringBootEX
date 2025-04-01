@@ -1,6 +1,6 @@
 package org.zerock.sb2.todo;
 
-
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,12 +15,10 @@ import org.zerock.sb2.todo.entities.QTodo;
 import org.zerock.sb2.todo.entities.Todo;
 import org.zerock.sb2.todo.repository.TodoRepository;
 
-import com.querydsl.jpa.JPQLQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
-
+import com.querydsl.jpa.JPQLQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -36,34 +34,44 @@ public class TodoRepoTests {
   private JPAQueryFactory queryFactory;
 
   @Test
-  public void testSearch1(){
+  public void testSearch1() {
+
     Pageable pageable = PageRequest.of(0,10);
+
     repository.list1(pageable);
+
   }
+  
 
 
   @Test
-  public void testQuery(){
+  public void testQuery() {
+
     log.info(queryFactory);
 
     QTodo todo = QTodo.todo;
-    JPQLQuery<Todo> query =queryFactory.selectFrom(todo);
+
+    JPQLQuery<Todo> query = queryFactory.selectFrom(todo);
 
     query.where(todo.tno.gt(0L));
     query.where(todo.title.like("AAA"));
 
     query.orderBy(new OrderSpecifier<>(Order.DESC, todo.tno));
+
     query.limit(10);
     query.offset(5);
-
+    
     log.info(query);
 
     java.util.List<Todo> entityList = query.fetch();
-    long count = query.fetchCount();
+
+    long count  = query.fetchCount();
 
     log.info(entityList);
     log.info(count);
+
   }
+
 
   //gradlew build -x test
   //@Disabled
@@ -78,6 +86,7 @@ public class TodoRepoTests {
 
     repository.save(todo);
 
+    log.info(todo.getTno());
 
   }
 
@@ -103,7 +112,7 @@ public class TodoRepoTests {
   @Commit
   public void testUpdate() {
 
-    java.util.Optional<Todo> result = repository.findById(2L);
+    java.util.Optional<Todo> result = repository.findById(1L);
 
     Todo todo = result.get();
 
@@ -128,7 +137,6 @@ public class TodoRepoTests {
 
   }
 
-
   @Test
   public void testQuery1() {
 
@@ -139,11 +147,11 @@ public class TodoRepoTests {
   }
 
   @Test
-  public void testSelectDTO(){
+  public void testSelectDTO() {
+
     log.info(repository.selectDTO(1L));
+
   }
-
-
 
 
 }

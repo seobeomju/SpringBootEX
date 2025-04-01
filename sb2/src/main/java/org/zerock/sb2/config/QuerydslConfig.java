@@ -7,14 +7,12 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import jakarta.persistence.EntityManager;
 
-
 @Configuration
 public class QuerydslConfig {
-
+  
   @Bean
-  public JPAQueryFactory jpaQueryFactory(EntityManager em) {
-    return new JPAQueryFactory(em);
-  }
+	public JPAQueryFactory jpaQueryFactory(EntityManager em) {
+		return new JPAQueryFactory(em);
+	}
+
 }
-
-

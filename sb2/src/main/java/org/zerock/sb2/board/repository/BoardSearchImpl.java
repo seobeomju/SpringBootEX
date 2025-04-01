@@ -3,8 +3,8 @@ package org.zerock.sb2.board.repository;
 import org.zerock.sb2.board.dto.BoardListDTO;
 import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.board.dto.PageResponseDTO;
-import org.zerock.sb2.board.entites.BoardEntity;
-import org.zerock.sb2.board.entites.QBoardEntity;
+import org.zerock.sb2.board.entities.BoardEntity;
+import org.zerock.sb2.board.entities.QBoardEntity;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
@@ -33,7 +33,7 @@ public class BoardSearchImpl implements BoardSearch {
 
     //검색 조건
     BooleanBuilder builder = new BooleanBuilder();
- 
+
     String[] types = pageRequestDTO.getArr(); // ['T','C','W']
 
     if(types != null && types.length > 0 ){
@@ -52,6 +52,8 @@ public class BoardSearchImpl implements BoardSearch {
       query.where(builder);
 
     }//end if
+    
+
 
     query.limit(pageRequestDTO.getLimit());
     query.offset(pageRequestDTO.getOffset());
@@ -60,14 +62,11 @@ public class BoardSearchImpl implements BoardSearch {
     JPQLQuery<BoardListDTO> dtoQuery = query.select(
       Projections.bean(
       BoardListDTO.class, 
-           board.bno, board.title,board.writer,board.regDate, board.viewCnt ));
+           board.bno, board.title,board.writer, board.regDate, board.viewCnt ));
 
     long count = dtoQuery.fetchCount();
     
     java.util.List<BoardListDTO> dtoList = dtoQuery.fetch();
-    
-    log.info(dtoList);
-    log.info(count);
 
     return PageResponseDTO.<BoardListDTO>withAll()
     .dtoList(dtoList)

@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @RequiredArgsConstructor
 public class BoardController {
 
-private final BoardService service;
+  private final BoardService service;
+
   @GetMapping("list")
   public void list( @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model ) {
   
@@ -28,5 +29,6 @@ private final BoardService service;
     model.addAttribute("data", service.list(requestDTO));
 
   }
-
+  
+  
 }

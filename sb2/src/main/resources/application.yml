@@ -24,9 +24,10 @@ spring:
         format_sql: true
   sql:
     init:
-      mode: never
+      mode: never 
 
 #로그 설정   
 logging:
   level:
     org.zerock.sb2: INFO
+

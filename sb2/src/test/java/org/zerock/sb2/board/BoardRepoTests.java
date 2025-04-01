@@ -1,10 +1,12 @@
 package org.zerock.sb2.board;
 
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.sb2.board.dto.PageRequestDTO;
-import org.zerock.sb2.board.entites.BoardEntity;
+import org.zerock.sb2.board.entities.BoardEntity;
 import org.zerock.sb2.board.repository.BoardRepository;
 
 import lombok.extern.log4j.Log4j2;
@@ -17,12 +19,16 @@ public class BoardRepoTests {
   BoardRepository repository;
 
   @Test
-  public void testList(){
+  public void testList() {
+
     PageRequestDTO pageRequestDTO = new PageRequestDTO();
     pageRequestDTO.setType("TCW");
     pageRequestDTO.setKeyword("11");
+
     log.info(repository.list(pageRequestDTO));
+
   }
+
   @Test
   public void testInsert(){
     for (int i = 0; i < 123 ; i++) {
@@ -38,5 +44,7 @@ public class BoardRepoTests {
     }//end for
   }
 
-
 }
+
+
+

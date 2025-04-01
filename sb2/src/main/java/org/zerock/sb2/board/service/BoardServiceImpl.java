@@ -15,11 +15,13 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 @Log4j2
 public class BoardServiceImpl implements BoardService{
-    private final BoardRepository repository;
-    @Override
-    public PageResponseDTO<BoardListDTO> list(PageRequestDTO requestDTO) {
-      
-        return repository.list(requestDTO);
-    }
+
+  private final BoardRepository repository;
+
+  @Override
+  public PageResponseDTO<BoardListDTO> list(PageRequestDTO requestDTO) {
     
+    return repository.list(requestDTO);
+  }
+  
 }

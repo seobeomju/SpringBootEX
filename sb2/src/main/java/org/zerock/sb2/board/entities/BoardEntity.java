@@ -1,4 +1,4 @@
-package org.zerock.sb2.board.entites;
+package org.zerock.sb2.board.entities;
 
 import java.time.LocalDateTime;
 
@@ -21,34 +21,36 @@ import lombok.ToString;
 
 @EntityListeners(value = AuditingEntityListener.class)
 @Entity
-@Table(name="tbl_board")
+@Table(name = "tbl_board")
 @Getter
 @ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardEntity {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bno;
-    
-    @Column(nullable  =false, length =500)
-    private String title;
-    @Column(nullable  =false, length =2000)
-    private String content;
-    @Column(nullable  =false, length =50)
-    private String writer;
 
-    private boolean delFlag;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long bno;
 
-    private int viewCnt;
+  @Column(nullable = false, length = 500)
+  private String title;
 
-    @CreatedDate
-    @Column(name = "regdate", updatable = false)
-    protected LocalDateTime regDate;
+  @Column(nullable = false, length = 2000)
+  private String content;
 
-    @LastModifiedDate
-    @Column(name ="moddate" )
-    protected LocalDateTime modDate;
+  @Column(nullable = false, length = 50)
+  private String writer;
+
+  private boolean delFlag;
+
+  private int viewCnt;
+  
+  @CreatedDate
+  @Column(name = "regdate", updatable = false)
+  protected LocalDateTime regDate;
+
+  @LastModifiedDate
+  @Column(name ="moddate" )
+  protected LocalDateTime modDate;
 }
