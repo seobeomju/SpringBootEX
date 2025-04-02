@@ -1,10 +1,12 @@
 package org.zerock.sb2.board.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 public class BoardRegisterDTO {
     
-    @NotBlank
+    @NotBlank (message = "Title cannot be blank")
     private String title;
 
     @NotBlank

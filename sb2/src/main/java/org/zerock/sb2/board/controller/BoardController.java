@@ -49,7 +49,7 @@ public class BoardController {
 
     if(bindingResult.hasErrors()){
       log.info("has errors...........");
-      rttr.addFlashAttribute("erroers",bindingResult.getAllErrors());
+      rttr.addFlashAttribute("errors",bindingResult.getAllErrors());
 
       return "redirect:/board/register";
     }
