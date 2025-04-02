@@ -16,5 +16,7 @@ import org.zerock.sb2.reply.entities.ReplyEntity;
     Page<Object[]> listofBoard2(@Param("bno") Long bno, Pageable pageable);
 
     
+    @Query("select new org.zerock.sb2.reply.dto.ReplyListDTO(r.rno, r.replyText, r.replyer, r.board.bno , r.regDate, r.modDate )from ReplyEntity r where r.board.bno = :bno")
+    Page<Object[]> listofBoard3(@Param("bno") Long bno, Pageable pageable);
 
  }

@@ -13,4 +13,16 @@ public class ReplyListDTO {
 
     private LocalDateTime regDate;
     private LocalDateTime modDate;
+    
+    public ReplyListDTO(Long rno, String replyText, String replyer, Long bno, LocalDateTime regDate,
+            LocalDateTime modDate) {
+        this.rno = rno;
+        this.replyText = replyText;
+        this.replyer = replyer;
+        this.bno = bno;
+        this.regDate = regDate;
+        this.modDate = modDate;
+    }
+
+    
 }
