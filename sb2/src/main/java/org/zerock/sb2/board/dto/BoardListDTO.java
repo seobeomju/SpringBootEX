@@ -17,4 +17,5 @@ public class BoardListDTO {
   
   private int viewCnt;
   
+  private Long replyCnt;
 }

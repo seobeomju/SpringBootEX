@@ -57,7 +57,7 @@ public class BoardSearchImpl implements BoardSearch {
 
     }//end if
     
-
+    query.groupBy(board);
 
     query.limit(pageRequestDTO.getLimit());
     query.offset(pageRequestDTO.getOffset());
@@ -66,7 +66,13 @@ public class BoardSearchImpl implements BoardSearch {
     JPQLQuery<BoardListDTO> dtoQuery = query.select(
       Projections.bean(
       BoardListDTO.class, 
-           board.bno, board.title,board.writer, board.regDate, board.viewCnt ));
+           board.bno, 
+           board.title,
+           board.writer, 
+           board.regDate, 
+           board.viewCnt, 
+           reply.rno.count().as("replyCnt") 
+           ));
 
     long count = dtoQuery.fetchCount();
     
