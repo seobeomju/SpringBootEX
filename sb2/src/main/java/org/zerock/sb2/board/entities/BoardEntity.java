@@ -23,7 +23,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "tbl_board")
 @Getter
-@ToString
+@ToString( exclude = {"board"})
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

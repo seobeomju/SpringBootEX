@@ -31,6 +31,7 @@ public class ReplyRepoTest {
 
         repository.save(replyEntity);
     }
+    
     @Test
     public void testRead(){
         Long rno = 1L;
