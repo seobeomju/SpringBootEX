@@ -5,6 +5,7 @@ import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.board.dto.PageResponseDTO;
 import org.zerock.sb2.board.entities.BoardEntity;
 import org.zerock.sb2.board.entities.QBoardEntity;
+import org.zerock.sb2.reply.entities.QReplyEntity;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
@@ -26,8 +27,11 @@ public class BoardSearchImpl implements BoardSearch {
   public PageResponseDTO<BoardListDTO> list(PageRequestDTO pageRequestDTO) {
     
     QBoardEntity board = QBoardEntity.boardEntity;
+    QReplyEntity reply = QReplyEntity.replyEntity;
 
     JPQLQuery<BoardEntity> query = queryFactory.selectFrom(board);
+    query.leftJoin(reply).on(reply.board.eq(board)); //레프트아우터 조인
+
     query.where(board.bno.gt(0L));
     query.where(board.delFlag.eq(false));
 
