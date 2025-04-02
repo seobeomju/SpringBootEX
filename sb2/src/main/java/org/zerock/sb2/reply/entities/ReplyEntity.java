@@ -13,6 +13,7 @@ import jakarta.persistence.Column;
  import jakarta.persistence.GeneratedValue;
  import jakarta.persistence.GenerationType;
  import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
  import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ import jakarta.persistence.Table;
  @EntityListeners(value = AuditingEntityListener.class)
  @Entity
  @Table(name = "tbl_reply", indexes ={
-  
+    @Index(name = "idx_board", columnList = "board_bno")
  })
  @Getter
  @ToString
