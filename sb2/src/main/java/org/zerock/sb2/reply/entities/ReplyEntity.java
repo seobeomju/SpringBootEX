@@ -29,7 +29,7 @@ import jakarta.persistence.Table;
     @Index(name = "idx_board", columnList = "board_bno")
  })
  @Getter
- @ToString
+ @ToString( exclude = {"board"})
  @Builder
  @AllArgsConstructor
  @NoArgsConstructor
