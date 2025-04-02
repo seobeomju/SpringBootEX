@@ -27,8 +27,12 @@ public class BoardController {
     log.info("Board list............");
 
     model.addAttribute("data", service.list(requestDTO));
-
+    
   }
   
+  @GetMapping("register")
+  public void register(){
+
+  }
   
 }
