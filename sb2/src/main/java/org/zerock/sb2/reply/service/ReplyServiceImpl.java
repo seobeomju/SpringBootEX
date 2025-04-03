@@ -49,7 +49,10 @@ public class ReplyServiceImpl implements ReplyService{
     public PageResponseDTO<ReplyListDTO> getListOfBoard(Long bno, PageRequestDTO requestDTO) throws ReplyException {
         PageResponseDTO<ReplyListDTO> responseDTO=
                 replyRepository.listQuerydsl(bno,requestDTO);
-
+        //이런식으로도 처리할 수는 있따.
+//        if(responseDTO.getDtoList()==null) {
+//            throw new ReplyException(404);
+//        }
         return responseDTO;
     }
 
