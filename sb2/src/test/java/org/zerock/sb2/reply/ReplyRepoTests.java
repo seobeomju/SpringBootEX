@@ -11,9 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.sb2.board.entities.BoardEntity;
 import org.zerock.sb2.reply.dto.ReplyListDTO;
+import org.zerock.sb2.reply.dto.ReplyReadDTo;
 import org.zerock.sb2.reply.entities.ReplyEntity;
 import org.zerock.sb2.reply.repository.ReplyRepository;
 
@@ -96,5 +98,25 @@ public class ReplyRepoTests {
 
   }
 
+  @Test
+  public void testSelectOne(){
+    Long rno =1L;
+
+    ReplyReadDTo dto = repository.selectOne(rno);
+  
+    log.info(dto);
+  
+  }
+
+  @Test
+  @Transactional
+  @Commit
+  public void testUpdate(){
+    Long rno = 1L;
+    String text = "Reply 1 Updated....";
+
+    repository.updateOne(text, rno);
+
+  }
 
 }

@@ -55,4 +55,8 @@ import jakarta.persistence.Table;
    @Column(name ="moddate" )
    protected LocalDateTime modDate;
 
+  public void changeReplyText(String text){
+    this.replyText = text;
+  }
+
  }

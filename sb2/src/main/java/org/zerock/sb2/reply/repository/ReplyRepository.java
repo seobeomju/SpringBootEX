@@ -3,6 +3,7 @@ package org.zerock.sb2.reply.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.zerock.sb2.reply.dto.ReplyListDTO;
@@ -13,6 +14,14 @@ public interface ReplyRepository extends JpaRepository<ReplyEntity, Long>{
   
   @Query("select new org.zerock.sb2.reply.dto.ReplyReadDTo(r) from ReplyEntity r  where r.rno = :rno")
   ReplyReadDTo selectOne (@Param("rno") Long rno);
+
+  @Modifying
+  @Query("update ReplyEntity r SET r.replyText = :text, r.modDate = CURRENT_TIMESTAMP WHERE r.rno =:rno ")
+  int updateOne(@Param("text") String text, @Param("rno")Long rno);
+
+  @Modifying
+  @Query("delete from ReplyEntity r WHERE r.rno=:rno")
+  int deleteOne( @Param("rno")Long rno);
 
 
   @Query("select r from ReplyEntity r where r.board.bno = :bno ")
