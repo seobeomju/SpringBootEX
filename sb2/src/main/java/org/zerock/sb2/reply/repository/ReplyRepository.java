@@ -7,14 +7,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.zerock.sb2.reply.dto.ReplyListDTO;
-import org.zerock.sb2.reply.dto.ReplyReadDTo;
+import org.zerock.sb2.reply.dto.ReplyReadDTO;
 import org.zerock.sb2.reply.entities.ReplyEntity;
 import org.zerock.sb2.reply.entities.ReplySearch;
 
 public interface ReplyRepository extends JpaRepository<ReplyEntity, Long>,ReplySearch{
   
-  @Query("select new org.zerock.sb2.reply.dto.ReplyReadDTo(r) from ReplyEntity r  where r.rno = :rno")
-  ReplyReadDTo selectOne (@Param("rno") Long rno);
+  @Query("select new org.zerock.sb2.reply.dto.ReplyReadDTO(r) from ReplyEntity r  where r.rno = :rno")
+  ReplyReadDTO selectOne (@Param("rno") Long rno);
 
   @Modifying
   @Query("update ReplyEntity r SET r.replyText = :text, r.modDate = CURRENT_TIMESTAMP WHERE r.rno =:rno ")

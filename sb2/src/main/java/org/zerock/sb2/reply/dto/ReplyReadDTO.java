@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ReplyReadDTo {
+public class ReplyReadDTO {
 
     private Long rno;
 
@@ -23,7 +23,7 @@ public class ReplyReadDTo {
 
     private Long bno;
     
-    public ReplyReadDTo(ReplyEntity entity){
+    public ReplyReadDTO(ReplyEntity entity){
         this.rno = entity.getRno();
         this.replyText = entity.getReplyText();
         this.replyer = entity.getReplyer();

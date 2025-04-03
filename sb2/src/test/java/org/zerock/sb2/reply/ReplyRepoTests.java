@@ -17,7 +17,7 @@ import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.board.dto.PageResponseDTO;
 import org.zerock.sb2.board.entities.BoardEntity;
 import org.zerock.sb2.reply.dto.ReplyListDTO;
-import org.zerock.sb2.reply.dto.ReplyReadDTo;
+import org.zerock.sb2.reply.dto.ReplyReadDTO;
 import org.zerock.sb2.reply.entities.ReplyEntity;
 import org.zerock.sb2.reply.repository.ReplyRepository;
 
@@ -104,7 +104,7 @@ public class ReplyRepoTests {
   public void testSelectOne(){
     Long rno =1L;
 
-    ReplyReadDTo dto = repository.selectOne(rno);
+    ReplyReadDTO dto = repository.selectOne(rno);
   
     log.info(dto);
   
