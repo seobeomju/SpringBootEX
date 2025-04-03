@@ -5,8 +5,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.checkerframework.checker.units.qual.t;
-
 import lombok.ToString;
 
 @ToString
@@ -58,7 +56,7 @@ public class PageRequestDTO {
     	try {
 			buffer.append("&keyword="+URLEncoder.encode(keyword,"UTF-8"));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
     	
