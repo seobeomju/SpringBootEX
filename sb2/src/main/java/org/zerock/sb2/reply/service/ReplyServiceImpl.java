@@ -5,7 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.sb2.board.dto.PageRequestDTO;
+import org.zerock.sb2.board.dto.PageResponseDTO;
+import org.zerock.sb2.board.entities.BoardEntity;
 import org.zerock.sb2.reply.dto.ReplyAddDTO;
+import org.zerock.sb2.reply.dto.ReplyListDTO;
 import org.zerock.sb2.reply.dto.ReplyReadDTO;
 import org.zerock.sb2.reply.entities.ReplyEntity;
 import org.zerock.sb2.reply.exception.ReplyException;
@@ -40,4 +44,14 @@ public class ReplyServiceImpl implements ReplyService{
 
         return dto;
     }
+
+    @Override
+    public PageResponseDTO<ReplyListDTO> getListOfBoard(Long bno, PageRequestDTO requestDTO) throws ReplyException {
+        PageResponseDTO<ReplyListDTO> responseDTO=
+                replyRepository.listQuerydsl(bno,requestDTO);
+
+        return responseDTO;
+    }
+
+
 }
