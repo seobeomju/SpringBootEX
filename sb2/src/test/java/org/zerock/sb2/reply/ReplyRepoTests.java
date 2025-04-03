@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.sb2.board.dto.PageRequestDTO;
+import org.zerock.sb2.board.dto.PageResponseDTO;
 import org.zerock.sb2.board.entities.BoardEntity;
 import org.zerock.sb2.reply.dto.ReplyListDTO;
 import org.zerock.sb2.reply.dto.ReplyReadDTo;
@@ -118,5 +120,18 @@ public class ReplyRepoTests {
     repository.updateOne(text, rno);
 
   }
+
+    @Test
+   public void testListOfBoardQuerydsl() {
+ 
+     Long bno = 123L;
+ 
+     PageRequestDTO requestDTO = new PageRequestDTO(); //1, 10
+ 
+     PageResponseDTO<ReplyListDTO> res = repository.listQuerydsl(bno, requestDTO);
+ 
+     log.info(res);
+   }
+ 
 
 }

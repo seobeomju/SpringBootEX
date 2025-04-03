@@ -9,8 +9,9 @@ import org.springframework.data.repository.query.Param;
 import org.zerock.sb2.reply.dto.ReplyListDTO;
 import org.zerock.sb2.reply.dto.ReplyReadDTo;
 import org.zerock.sb2.reply.entities.ReplyEntity;
+import org.zerock.sb2.reply.entities.ReplySearch;
 
-public interface ReplyRepository extends JpaRepository<ReplyEntity, Long>{
+public interface ReplyRepository extends JpaRepository<ReplyEntity, Long>,ReplySearch{
   
   @Query("select new org.zerock.sb2.reply.dto.ReplyReadDTo(r) from ReplyEntity r  where r.rno = :rno")
   ReplyReadDTo selectOne (@Param("rno") Long rno);
