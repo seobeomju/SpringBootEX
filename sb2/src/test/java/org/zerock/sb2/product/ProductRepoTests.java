@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.zerock.sb2.board.dto.PageRequestDTO;
+import org.zerock.sb2.board.dto.PageResponseDTO;
 import org.zerock.sb2.product.dto.ProductListDTO;
 import org.zerock.sb2.product.dto.ProductReadDTO;
 import org.zerock.sb2.product.entities.ProductEntity;
@@ -83,5 +85,11 @@ public class ProductRepoTests {
         result.forEach(dto -> log.info(dto));
     }
 
+    @Test
+    public void testListQuerydsl(){
+        PageRequestDTO requestDTO = new PageRequestDTO();
+        PageResponseDTO<ProductListDTO> result = repo.listQuerydsl(requestDTO);
 
+        log.info(result);
+    }
 }
