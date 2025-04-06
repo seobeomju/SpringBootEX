@@ -1,6 +1,9 @@
 package org.zerock.sb2.product.entities;
 
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -8,6 +11,8 @@ import lombok.ToString;
 @Table(name = "tbl_product_review")
 @Getter
 @ToString
+@Builder
+@AllArgsConstructor
 public class ProductReview {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)

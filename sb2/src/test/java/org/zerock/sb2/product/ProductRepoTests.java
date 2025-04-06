@@ -13,7 +13,9 @@ import org.zerock.sb2.board.dto.PageResponseDTO;
 import org.zerock.sb2.product.dto.ProductListDTO;
 import org.zerock.sb2.product.dto.ProductReadDTO;
 import org.zerock.sb2.product.entities.ProductEntity;
+import org.zerock.sb2.product.entities.ProductReview;
 import org.zerock.sb2.product.repository.ProductRepository;
+import org.zerock.sb2.product.repository.ProductReviewRepository;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -25,6 +27,35 @@ public class ProductRepoTests {
     @Autowired(required = false)
     ProductRepository repo;
 
+    @Autowired(required = false)
+    ProductReviewRepository reviewRepo;
+
+    @Test
+    public void insertReviews() {
+
+        Long[] pnos  = {32L, 30L, 28L};
+
+        for (Long pno : pnos) {
+
+            for (int i = 0; i < 10; i++) {
+
+                ProductReview pr = ProductReview.builder()
+                        .reivewer("user00")
+                        .comment("so good")
+                        .score( (i % 5) +1 )
+                        .product(ProductEntity.builder().pno(pno).build())
+                        .build();
+
+                reviewRepo.save(pr);
+
+            }//for inner
+
+
+
+        }//for outer
+
+
+    }
 
     @Test
     public void insertProduct() {

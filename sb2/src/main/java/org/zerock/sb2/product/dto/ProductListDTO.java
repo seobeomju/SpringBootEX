@@ -12,11 +12,16 @@ public class ProductListDTO {
     private int price;
     private String imgName;
 
-    public ProductListDTO(Long pno, String pname, int price, String imgName) {
+    private double avgRating;
+    private long reviewCnt;
+
+    public ProductListDTO(Long pno, String pname, int price, String imgName, double avgRating, long reviewCnt) {
         this.pno = pno;
         this.pname = pname;
         this.price = price;
         this.imgName = imgName;
+        this.avgRating = avgRating;
+        this.reviewCnt = reviewCnt;
     }
 
 }
