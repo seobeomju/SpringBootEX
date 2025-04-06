@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.zerock.sb2.product.dto.ProductReadDTO;
 import org.zerock.sb2.product.entities.ProductEntity;
 import org.zerock.sb2.product.repository.ProductRepository;
 
@@ -49,5 +50,13 @@ public class ProductRepoTests {
 
         log.info(product);
         log.info(product.getImages());
+    }
+
+    @Test
+    public void testRead3(){
+        ProductEntity product = repo.selectOne(1L);
+        ProductReadDTO dto = new ProductReadDTO(product);
+        log.info(dto);
+
     }
 }
