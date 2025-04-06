@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Table(name = "tbl_product")
 @EntityListeners(value = AuditingEntityListener.class)
 @Getter
-@ToString
+@ToString(exclude = "images")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +28,17 @@ public class ProductEntity {
     @CollectionTable(
             name = "tbl_product_img",
             joinColumns = @JoinColumn(name="product_pno") )
+    @Builder.Default
     private java.util.List<ProductImage> images = new ArrayList<>();
+
+    public void addImage(String filename) {
+        ProductImage image = new ProductImage();
+        image.setImgname(filename);
+        image.setOrd(images.size());
+    }
+    public void clearImages() {
+        images.clear();
+    }
+
 
 }
