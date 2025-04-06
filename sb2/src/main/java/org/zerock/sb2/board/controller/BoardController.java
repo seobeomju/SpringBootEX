@@ -1,6 +1,5 @@
 package org.zerock.sb2.board.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;

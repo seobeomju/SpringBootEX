@@ -11,7 +11,6 @@ import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.board.dto.PageResponseDTO;
 import org.zerock.sb2.reply.dto.ReplyAddDTO;
 import org.zerock.sb2.reply.dto.ReplyListDTO;
-import org.zerock.sb2.reply.exception.ReplyException;
 import org.zerock.sb2.reply.service.ReplyService;
 
 import java.util.HashMap;
