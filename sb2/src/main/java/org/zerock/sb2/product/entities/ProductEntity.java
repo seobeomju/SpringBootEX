@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.ArrayList;
+
 @Entity
 @Table(name = "tbl_product")
 @EntityListeners(value = AuditingEntityListener.class)
@@ -22,5 +24,10 @@ public class ProductEntity {
 
     private int price;
 
+    @ElementCollection(fetch =  FetchType.LAZY)
+    @CollectionTable(
+            name = "tbl_product_img",
+            joinColumns = @JoinColumn(name="product_pno") )
+    private java.util.List<ProductImage> images = new ArrayList<>();
 
 }
