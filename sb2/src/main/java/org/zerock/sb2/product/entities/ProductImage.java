@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 public class ProductImage {
 
-    private String imgname;
+    private String imgName;
 
     private int ord;
 }

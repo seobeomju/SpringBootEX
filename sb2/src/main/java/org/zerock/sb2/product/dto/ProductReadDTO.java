@@ -22,6 +22,6 @@ public class ProductReadDTO {
         this.pname = entity.getPname();
         this.price = entity.getPrice();
         this.imageNames = entity.getImages().stream()
-                .map(pi -> pi.getImgname()).collect(Collectors.toList());
+                .map(pi -> pi.getImgName()).collect(Collectors.toList());
     }
 }

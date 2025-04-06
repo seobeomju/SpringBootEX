@@ -33,7 +33,7 @@ public class ProductEntity {
 
     public void addImage(String filename) {
         ProductImage image = new ProductImage();
-        image.setImgname(filename);
+        image.setImgName(filename);
         image.setOrd(images.size());
 
         images.add(image);

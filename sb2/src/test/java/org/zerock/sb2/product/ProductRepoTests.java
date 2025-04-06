@@ -4,10 +4,15 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.zerock.sb2.product.dto.ProductReadDTO;
 import org.zerock.sb2.product.entities.ProductEntity;
 import org.zerock.sb2.product.repository.ProductRepository;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @SpringBootTest
@@ -54,9 +59,19 @@ public class ProductRepoTests {
 
     @Test
     public void testRead3(){
+        //ElementCollection이 여러 개인 경우 한 개의 객체로 변환하는데 어려움이 있다.
+        //Java 코드를 이용해서 변환해야 한다
         ProductEntity product = repo.selectOne(1L);
         ProductReadDTO dto = new ProductReadDTO(product);
         log.info(dto);
 
+    }
+
+    @Test
+    public void testList1(){
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("pno").descending());
+        Page<Object[]> result = repo.list1(pageable);
+
+        result.forEach(arr -> log.info(Arrays.toString(arr)));
     }
 }
