@@ -40,7 +40,7 @@ public class ProductRepoTests {
             for (int i = 0; i < 10; i++) {
 
                 ProductReview pr = ProductReview.builder()
-                        .reivewer("user00")
+                        .reviewer("user00")
                         .comment("so good")
                         .score( (i % 5) +1 )
                         .product(ProductEntity.builder().pno(pno).build())
@@ -108,13 +108,13 @@ public class ProductRepoTests {
 
         result.forEach(arr -> log.info(Arrays.toString(arr)));
     }
-    @Test
-    public void testList2(){
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("pno").descending());
-        Page<ProductListDTO> result = repo.list1DTO(pageable);
-
-        result.forEach(dto -> log.info(dto));
-    }
+//    @Test
+//    public void testList2(){
+//        Pageable pageable = PageRequest.of(0, 10, Sort.by("pno").descending());
+//        Page<ProductListDTO> result = repo.list1DTO(pageable);
+//
+//        result.forEach(dto -> log.info(dto));
+//    }
 
     @Test
     public void testListQuerydsl(){

@@ -1,25 +1,28 @@
 package org.zerock.sb2.product.entities;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "tbl_product_review")
 @Getter
-@ToString
+@ToString(exclude = "product")
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProductReview {
+
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rno;
-    private String reivewer;
-    private  int score;
-    private  String comment;
+
+    private String reviewer;
+
+    private int score;
+
+    private String comment;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private ProductEntity product;
+
 }
