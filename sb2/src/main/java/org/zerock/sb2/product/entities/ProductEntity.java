@@ -2,6 +2,7 @@ package org.zerock.sb2.product.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ProductEntity {
     @CollectionTable(
             name = "tbl_product_img",
             joinColumns = @JoinColumn(name="product_pno") )
+    @BatchSize(size = 10)
     @Builder.Default
     private java.util.List<ProductImage> images = new ArrayList<>();
 

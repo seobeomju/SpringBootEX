@@ -1,5 +1,6 @@
 package org.zerock.sb2.product;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,5 +123,20 @@ public class ProductRepoTests {
         PageResponseDTO<ProductListDTO> result = repo.listQuerydsl(requestDTO);
 
         log.info(result);
+    }
+
+    @Transactional
+    @Test
+    public void testZ1() {
+
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("pno").descending());
+
+        Page<ProductEntity> result = repo.findAll(pageable);
+
+        result.forEach(product -> {
+            log.info("--------------------");
+            log.info(product);
+            log.info(product.getImages());
+        });
     }
 }
