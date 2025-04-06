@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.sb2.product.entities.ProductEntity;
 import org.zerock.sb2.product.repository.ProductRepository;
 
+import java.util.Optional;
+
 @SpringBootTest
 @Log4j2
 public class ProductRepoTests {
@@ -28,5 +30,15 @@ public class ProductRepoTests {
 
             repo.save(product);
         }//end for
+    }
+
+    @Test
+    public void testRead1(){
+        Optional<ProductEntity> result = repo.findById(1L);
+
+        ProductEntity product = result.get();
+
+        //tbl_product_img 테이블은 처리되지 않는다.
+        log.info(product);
     }
 }
