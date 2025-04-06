@@ -16,6 +16,8 @@ import org.zerock.sb2.product.entities.ProductEntity;
 import org.zerock.sb2.product.entities.QProductEntity;
 import org.zerock.sb2.product.entities.QProductImage;
 
+import java.util.List;
+
 @Log4j2
 @RequiredArgsConstructor
 public class ProductSearchImpl implements ProductSearch {
@@ -40,13 +42,21 @@ public class ProductSearchImpl implements ProductSearch {
         query.offset(pageRequestDTO.getOffset());
         query.orderBy(new OrderSpecifier<>(Order.DESC, qProductEntity.pno));
 
-        query.select(Projections.bean(
+        JPQLQuery<ProductListDTO>dtoQuery=query.select(Projections.bean(
                 ProductListDTO.class,
                 qProductEntity.pno,
                 qProductEntity.pname,
                 qProductEntity.price,
                 qProductImage.imgName.as("imgName")
         ));
-        return null;
+
+        List<ProductListDTO> dtoList = dtoQuery.fetch();
+        long total = dtoQuery.fetchCount();
+
+        return PageResponseDTO.<ProductListDTO>withAll()
+                .dtoList(dtoList)
+                .total((int)total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
     }
 }
