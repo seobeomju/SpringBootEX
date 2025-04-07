@@ -22,7 +22,21 @@ public class OrderEntity {
 
     private String customer;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @Builder.Default
     private List<OrderDetailEntity> details = new ArrayList<>();
+
+    public void addDetail(OrderDetailEntity detail) {
+
+        //양방향이니까 OrderDetailEntity역시 OrderEntity를 참조해야만 함
+
+        //양방향이니까 OrderDetailEntity역시 OrderEntity를 참조해야만 함
+        detail.setOrderEntity(this);
+
+        details.add(detail);
+    }
 
 }
