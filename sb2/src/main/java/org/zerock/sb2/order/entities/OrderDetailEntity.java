@@ -30,4 +30,7 @@ public class OrderDetailEntity {
         this.order = order;
     }
 
+    public void changeQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

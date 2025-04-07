@@ -46,4 +46,12 @@ public class OrderEntity {
         detail.setOrderEntity(null);
 
     }
+
+    public void updateDetail(OrderDetailEntity detail) {
+
+        details.remove(detail);
+        detail.setOrderEntity(this);
+        details.add(detail);
+
+    }
 }
