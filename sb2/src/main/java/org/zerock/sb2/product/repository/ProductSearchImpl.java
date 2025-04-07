@@ -84,6 +84,8 @@ public class ProductSearchImpl implements ProductSearch {
         query.offset(pageRequestDTO.getOffset());
         query.orderBy(new OrderSpecifier<>(Order.DESC, qProductEntity.pno));
 
+        query.fetch();
+
         return null;
     }
 }

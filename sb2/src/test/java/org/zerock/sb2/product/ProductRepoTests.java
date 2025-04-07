@@ -139,4 +139,11 @@ public class ProductRepoTests {
             log.info(product.getImages());
         });
     }
+    @Transactional
+    @Test
+    public void testAll() {
+
+        PageRequestDTO requestDTO = new PageRequestDTO();
+        repo.listAllQuerydsl(requestDTO);
+    }
 }
