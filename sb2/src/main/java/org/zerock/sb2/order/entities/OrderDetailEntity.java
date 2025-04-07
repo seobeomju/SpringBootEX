@@ -2,6 +2,7 @@ package org.zerock.sb2.order.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.zerock.sb2.product.entities.ProductEntity;
 
 @Entity
