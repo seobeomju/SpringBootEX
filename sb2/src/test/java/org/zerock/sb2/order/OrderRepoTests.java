@@ -11,8 +11,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.sb2.order.entities.OrderDetailEntity;
 import org.zerock.sb2.order.entities.OrderEntity;
+import org.zerock.sb2.order.repository.OrderDetailEntityRepository;
 import org.zerock.sb2.order.repository.OrderEntityRepository;
 import org.zerock.sb2.product.entities.ProductEntity;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 @Log4j2
@@ -20,6 +24,9 @@ public class OrderRepoTests {
 
     @Autowired(required = false)
     private OrderEntityRepository repo;
+
+    @Autowired(required = false)
+    private OrderDetailEntityRepository detailRepo;
 
     @Test
     public void testInsert(){
@@ -117,6 +124,37 @@ public class OrderRepoTests {
 
             log.info("-------------------");
         });
+    }
+
+    @Transactional
+    @Test
+    public void testOfOrderAll(){
+
+        String customer = "user01";
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("ono").descending());
+
+        Page<OrderEntity> page = repo.listOfUserOrder(customer, pageable);
+
+        //page.get().forEach(orderEntity -> {log.info(orderEntity);});
+
+
+        //15,14,13,12,11,....5
+        java.util.List<Long> onos = page.stream().map(orderEntity -> orderEntity.getOno()).collect(Collectors.toUnmodifiableList());
+
+        List<OrderDetailEntity> detailList = detailRepo.listOfOnos(onos);
+
+        log.info("======================================");
+        log.info(detailList); //사용자가 주문한 주문 상세의 번호들
+
+        detailList.forEach(detailEntity -> {
+
+            log.info(detailEntity);
+            log.info("ORDER: " +detailEntity.getOrder());
+            log.info("PRODUCT: " +detailEntity.getProduct());
+            log.info("-----------------");
+
+        });
+
     }
 
 }
