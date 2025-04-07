@@ -78,23 +78,32 @@ public class ProductSearchImpl implements ProductSearch {
 
         JPQLQuery<ProductEntity> query = queryFactory.selectFrom(qProductEntity);
         query.leftJoin(qProductReview).on(qProductReview.product.eq(qProductEntity));
-        //query.leftJoin(qProductEntity.images, qProductImage);
+        query.leftJoin(qProductEntity.images, qProductImage);
 
         query.groupBy(qProductEntity);
         query.limit(pageRequestDTO.getLimit());
         query.offset(pageRequestDTO.getOffset());
         query.orderBy(new OrderSpecifier<>(Order.DESC, qProductEntity.pno));
 
-
-        //Tuple = (title,content,writer)
+        //Tuple = ( title, content, writer)
         JPQLQuery<Tuple> tupleQuery = query.select(
-                qProductEntity.pno,
-                qProductEntity.pname,
-                qProductEntity.price,
+                qProductEntity,
                 qProductReview.score.coalesce(0).avg().as("avgRating"),
-                qProductReview.count().as("reviewCnt"));
+                qProductReview.countDistinct().as("reviewCnt"));
 
-        tupleQuery.fetch();
+        List<Tuple> tupleList = tupleQuery.fetch();
+
+        tupleList.forEach(tuple -> {
+
+            ProductEntity product = tuple.get(0, ProductEntity.class);
+            log.info(product);
+            log.info(product.getImages());
+
+            log.info("----------------------");
+
+        });
+
+
         return null;
     }
 }
