@@ -8,6 +8,7 @@ import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.board.dto.PageResponseDTO;
 import org.zerock.sb2.product.dto.ProductAddDTO;
 import org.zerock.sb2.product.dto.ProductListAllDTO;
+import org.zerock.sb2.product.dto.ProductModifyDTO;
 import org.zerock.sb2.product.dto.ProductReadDTO;
 import org.zerock.sb2.product.entities.ProductEntity;
 import org.zerock.sb2.product.repository.ProductRepository;
@@ -28,6 +29,24 @@ public class ProductServiceImpl implements ProductService {
         repository.save(productEntity);
 
         return productEntity.getPno();
+    }
+
+    @Override
+    public void modify(ProductModifyDTO dto) {
+
+        //상품 엔티티 조회한 후에
+        ProductEntity productEntity = repository.selectOne(dto.getPno());
+
+        //변경 내용을 반영하고
+        productEntity.changePname(dto.getPname());
+        productEntity.changePrice(dto.getPrice());
+
+        //이미지 조정하고
+        productEntity.clearImages();
+        dto.getImageNames().forEach(imgName -> productEntity.addImage(imgName));
+
+        //변경감지 혹은 save
+
     }
 
     @Override

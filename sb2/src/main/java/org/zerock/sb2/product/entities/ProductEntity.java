@@ -46,5 +46,11 @@ public class ProductEntity {
         images.clear();
     }
 
+    public void changePname(String pname) {
+        this.pname = pname;
+    }
+    public void changePrice(int price) {
+        this.price = price;
+    }
 
 }

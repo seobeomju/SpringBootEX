@@ -5,12 +5,15 @@ import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.board.dto.PageResponseDTO;
 import org.zerock.sb2.product.dto.ProductAddDTO;
 import org.zerock.sb2.product.dto.ProductListAllDTO;
+import org.zerock.sb2.product.dto.ProductModifyDTO;
 import org.zerock.sb2.product.dto.ProductReadDTO;
 import org.zerock.sb2.product.entities.ProductEntity;
 
 public interface ProductService {
 
     Long add(ProductAddDTO dto);
+
+    void modify(ProductModifyDTO dto);
 
     ProductReadDTO read(Long pno);
 
