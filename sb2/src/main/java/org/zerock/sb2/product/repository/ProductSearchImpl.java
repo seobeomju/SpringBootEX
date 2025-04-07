@@ -18,6 +18,7 @@ import org.zerock.sb2.product.entities.QProductImage;
 import org.zerock.sb2.product.entities.QProductReview;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -93,17 +94,41 @@ public class ProductSearchImpl implements ProductSearch {
 
         List<Tuple> tupleList = tupleQuery.fetch();
 
-        tupleList.forEach(tuple -> {
+//        tupleList.forEach(tuple -> {
+//
+//            ProductEntity product = tuple.get(0, ProductEntity.class);
+//            log.info(product);
+//            log.info(product.getImages());
+//
+//            log.info("----------------------");
+//
+//        });
 
+        List<ProductListAllDTO> dtoList =   tupleList.stream().map(tuple -> {
             ProductEntity product = tuple.get(0, ProductEntity.class);
-            log.info(product);
-            log.info(product.getImages());
+            List<String> imageNames = product.getImages().stream().map(productImage -> productImage.getImgName()).collect(Collectors.toUnmodifiableList());
+            double avgRating = tuple.get(1, double.class);
+            long reviewCnt = tuple.get(2, long.class);
 
-            log.info("----------------------");
+            ProductListAllDTO productListAllDTO = new ProductListAllDTO();
 
-        });
+            productListAllDTO.setPno(product.getPno());
+            productListAllDTO.setPname(product.getPname());
+            productListAllDTO.setPrice(product.getPrice());
+            productListAllDTO.setImgNames(imageNames);
+            productListAllDTO.setAvgRating(avgRating);
+            productListAllDTO.setReviewCnt(reviewCnt);
 
+            return productListAllDTO;
 
-        return null;
+        }).collect(Collectors.toUnmodifiableList());
+
+        long total = tupleQuery.fetchCount();
+
+        return PageResponseDTO.<ProductListAllDTO>withAll()
+                .dtoList(dtoList)
+                .total((int) total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
     }
 }
