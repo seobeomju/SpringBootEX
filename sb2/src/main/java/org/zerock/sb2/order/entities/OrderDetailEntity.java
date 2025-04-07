@@ -10,20 +10,23 @@ import org.zerock.sb2.product.entities.ProductEntity;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"product, order"})
+@ToString(exclude = {"product", "order"})
 public class OrderDetailEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long odno;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProductEntity product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private OrderEntity order;
 
+    private int quantity;
+
     public void setOrderEntity(OrderEntity order) {
         this.order = order;
     }
+
 }
