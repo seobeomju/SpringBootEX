@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.zerock.sb2.board.dto.PageRequestDTO;
 import org.zerock.sb2.board.dto.PageResponseDTO;
+import org.zerock.sb2.product.dto.ProductListAllDTO;
 import org.zerock.sb2.product.dto.ProductListDTO;
 import org.zerock.sb2.product.entities.ProductEntity;
 import org.zerock.sb2.product.entities.QProductEntity;
@@ -65,5 +66,24 @@ public class ProductSearchImpl implements ProductSearch {
                 .total((int) total)
                 .pageRequestDTO(pageRequestDTO)
                 .build();
+    }
+
+    @Override
+    public PageResponseDTO<ProductListAllDTO> listAllQuerydsl(PageRequestDTO pageRequestDTO) {
+
+        QProductEntity qProductEntity = QProductEntity.productEntity;
+        QProductImage qProductImage = QProductImage.productImage;
+        QProductReview qProductReview = QProductReview.productReview;
+
+        JPQLQuery<ProductEntity> query = queryFactory.selectFrom(qProductEntity);
+        query.leftJoin(qProductReview).on(qProductReview.product.eq(qProductEntity));
+        //query.leftJoin(qProductEntity.images, qProductImage);
+
+        query.groupBy(qProductEntity);
+        query.limit(pageRequestDTO.getLimit());
+        query.offset(pageRequestDTO.getOffset());
+        query.orderBy(new OrderSpecifier<>(Order.DESC, qProductEntity.pno));
+
+        return null;
     }
 }
