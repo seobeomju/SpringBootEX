@@ -35,7 +35,6 @@ public class ReplyController {
     public ResponseEntity<Map<String, String>> add(
             @Valid @RequestBody ReplyAddDTO dto, BindingResult bindingResult){
 
-
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             bindingResult.getFieldErrors().forEach(error ->
@@ -49,7 +48,4 @@ public class ReplyController {
         return ResponseEntity.ok(Map.of("rno", String.valueOf(rno)));
 
     }
-
-
-
 }

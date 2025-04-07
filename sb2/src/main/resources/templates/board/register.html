@@ -31,13 +31,16 @@
 
 <script layout:fragment="script" th:inline="javascript">
 
-  const errors = [[${errors}]] //js 객체
+  const errors = [[ ${errors} ]] //js 객체 
 
   if(errors){
-  const errorMsg = Object.keys(errors).join(",")
-  
+    const errorMsg = Object.keys(errors).join(",")
+
     console.log(errorMsg)
 
-  alert(errorMsg)
+    alert(errorMsg)
   }
+  
+  
+
 </script>

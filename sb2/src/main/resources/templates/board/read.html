@@ -104,7 +104,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <!-- fragment end  -->
+<!-- fragment end  -->
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
@@ -114,20 +114,20 @@
 
   document.querySelector(".replyAddBtn").addEventListener("click", e=> {
 
-    console.log("click")
+      console.log("click")
 
-    const replyText = document.querySelector("input[name='replyText']").value
-    const replyer = document.querySelector("input[name='replyer']").value
-    const bno = [[${bno}]]
+      const replyText = document.querySelector("input[name='replyText']").value
+      const replyer = document.querySelector("input[name='replyer']").value
+      const bno = [[${bno}]]
 
-    const replyObj = {bno,replyText,replyer}
-    console.log(replyObj)
+      const replyObj = {bno,replyText,replyer}
+      console.log(replyObj)
 
-    axios.post("http://localhost:8080/replies", replyObj).then(res => {
-      console.log(res.data) //
-      //printReplies(res.data)
-      window.location.reload();
-    })
+      axios.post("http://localhost:8080/replies", replyObj).then(res => {
+          console.log(res.data) //
+          //printReplies(res.data)
+          window.location.reload();
+      })
   }, false)
 
 
@@ -137,15 +137,15 @@
 
   function printReplies(pageData) {
 
-    //댓글 목록 출력
-    const {dtoList} = pageData
+      //댓글 목록 출력
+      const {dtoList} = pageData
 
-    current = pageData.page
+      current = pageData.page
 
-    let replyStrArr = []
+      let replyStrArr = []
 
-    if(dtoList){
-      replyStrArr = dtoList.map(replyDTO => `
+      if(dtoList){
+          replyStrArr = dtoList.map(replyDTO => `
               <li class="list-group-item" data-rno=${replyDTO.rno}>
                 <div class="fw-bold">번호: ${replyDTO.rno}</div>
                 <div>댓글 내용: ${replyDTO.replyText}</div>
@@ -153,42 +153,42 @@
                 <div>작성 날짜: ${replyDTO.regDate}</div>
               </li>
           `)
-    }
+      }
 
-    replyList.innerHTML = replyStrArr.join("")
+      replyList.innerHTML = replyStrArr.join("")
 
-    //댓글 페이지 처리
+      //댓글 페이지 처리
 
-    let pageStr = ''
+      let pageStr = ''
 
-    const {prev, next, start, end, page} = pageData
+      const {prev, next, start, end, page} = pageData
 
-    if(prev){
-      pageStr += `<li class="page-item"><a class="page-link" href="${start-1}">이전</a></li>`
-    }
+      if(prev){
+          pageStr += `<li class="page-item"><a class="page-link" href="${start-1}">이전</a></li>`
+      }
 
-    for(let i = start; i <= end; i++){
-      pageStr += `<li class="page-item"><a class="page-link ${page === i? 'active': ''} " href="${i}">${i}</a></li>`
-    }
+      for(let i = start; i <= end; i++){
+          pageStr += `<li class="page-item"><a class="page-link ${page === i? 'active': ''} " href="${i}">${i}</a></li>`
+      }
 
-    if(next){
-      pageStr += `<li class="page-item"><a class="page-link" href="${end +1}">다음</a></li>`
-    }
+      if(next){
+          pageStr += `<li class="page-item"><a class="page-link" href="${end +1}">다음</a></li>`
+      }
 
-    document.querySelector(".pagination").innerHTML = pageStr
+      document.querySelector(".pagination").innerHTML = pageStr
   }
 
 
   document.querySelector(".pagination").addEventListener("click", e => {
 
-    e.preventDefault()
-    e.stopPropagation()
+      e.preventDefault()
+      e.stopPropagation()
 
-    const target = e.target
+      const target = e.target
 
-    const pageNum = target.getAttribute("href")
+      const pageNum = target.getAttribute("href")
 
-    getReplies(pageNum)
+      getReplies(pageNum)
 
   },false)
 
@@ -196,14 +196,14 @@
 
 
   function getReplies(pageNum, last){
+  
+      const lastStr = last ? '&last=true' :''
 
-    const lastStr = last ? '&last=true' :''
-
-    axios.get(`http://localhost:8080/replies/board/${bno}/list?page=${pageNum}${lastStr}`)
-            .then(res => {
-              console.log(res.data) //
-              printReplies(res.data)
-            })
+      axios.get(`http://localhost:8080/replies/board/${bno}/list?page=${pageNum}${lastStr}`)
+      .then(res => {
+          console.log(res.data) //
+          printReplies(res.data)
+      })
   }
 
   getReplies(1,true)
@@ -212,85 +212,85 @@
   //댓글 조회 및 모달 보이기
   document.querySelector(".replyList").addEventListener("click", e => {
 
-    const target = e.target
+      const target = e.target
 
-    const targetLi = target.closest("li")
+      const targetLi = target.closest("li")
 
-    const divText = targetLi.querySelector("div:nth-child(2)").innerHTML
+      const divText = targetLi.querySelector("div:nth-child(2)").innerHTML
 
-    if(divText.includes('삭제되었습니다')){
-      alert("삭제된 댓글입니다.")
-      return
-    }
-
-
-    const rno = targetLi.getAttribute("data-rno")
-
-    console.log(target, rno)
-
-    if(!rno){
-      return
-    }
-    //해당 rno 서버에서 조회하고 조회가 되면 모달 창의 내용물 수정하고, 띄우기
-
-    axios.get(`http://localhost:8080/replies/${rno}`)
-            .then(res => {
-              console.log(res.data)
-
-              const {rno, replyText, replyer} = res.data
-
-              const modal = document.querySelector("#myModal")
-
-              modal.querySelector("input[name='rno']").value = rno
-              modal.querySelector("input[name='replyText']").value = replyText
-              modal.querySelector("input[name='replyer']").value = replyer
+      if(divText.includes('삭제되었습니다')){
+          alert("삭제된 댓글입니다.")
+          return
+      }
 
 
-              myModal.show()
-            })
+      const rno = targetLi.getAttribute("data-rno")
+
+      console.log(target, rno)
+
+      if(!rno){
+          return
+      }
+      //해당 rno 서버에서 조회하고 조회가 되면 모달 창의 내용물 수정하고, 띄우기
+
+      axios.get(`http://localhost:8080/replies/${rno}`)
+      .then(res => {
+          console.log(res.data)
+
+          const {rno, replyText, replyer} = res.data
+
+          const modal = document.querySelector("#myModal")
+
+          modal.querySelector("input[name='rno']").value = rno
+          modal.querySelector("input[name='replyText']").value = replyText
+          modal.querySelector("input[name='replyer']").value = replyer
+
+
+          myModal.show()
+      })
 
   },false)
 
   document.querySelector("#editBtn").addEventListener("click", e => {
 
-    e.preventDefault()
-    e.stopPropagation()
+      e.preventDefault()
+      e.stopPropagation()
 
-    const modal = document.querySelector("#myModal")
+      const modal = document.querySelector("#myModal")
 
-    const rno = modal.querySelector("input[name='rno']").value
-    const replyText = modal.querySelector("input[name='replyText']").value
-    const replyer = modal.querySelector("input[name='replyer']").value
+      const rno = modal.querySelector("input[name='rno']").value
+      const replyText = modal.querySelector("input[name='replyText']").value
+      const replyer = modal.querySelector("input[name='replyer']").value
 
-    const replyObj = {rno, replyText, replyer}
+      const replyObj = {rno, replyText, replyer}
 
-    console.log(replyObj)
+      console.log(replyObj)
 
-    axios.put(`http://localhost:8080/replies/\${rno}`, replyObj)
-            .then(res => {
-              console.log(res.data)
-              getReplies(current)
-              myModal.hide()
+      axios.put(`http://localhost:8080/replies/\${rno}`, replyObj)
+      .then(res => {
+          console.log(res.data)
+          getReplies(current)
+          myModal.hide()
 
-            })
+      })
 
   }, false)
 
 
   document.querySelector("#deleteBtn").addEventListener("click", e => {
 
-    e.preventDefault()
-    e.stopPropagation()
+      e.preventDefault()
+      e.stopPropagation()
 
-    const modal = document.querySelector("#myModal")
-    const rno = modal.querySelector("input[name='rno']").value
+      const modal = document.querySelector("#myModal")
+      const rno = modal.querySelector("input[name='rno']").value
 
-    axios.delete(`http://localhost:8080/replies/\${rno}`)
-            .then(res => {
-              console.log(res.data)
-              getReplies(current)
-              myModal.hide()
-            })
+      axios.delete(`http://localhost:8080/replies/\${rno}`)
+      .then(res => {
+          console.log(res.data)
+          getReplies(current)
+          myModal.hide()
+      })
 
   },false)
 

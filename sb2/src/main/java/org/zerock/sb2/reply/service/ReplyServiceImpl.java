@@ -24,20 +24,21 @@ public class ReplyServiceImpl implements ReplyService{
 
     @Override
     public Long add(ReplyAddDTO addDTO) throws ReplyException {
+
         try {
             ReplyEntity entity = dtoToEntity(addDTO);
             replyRepository.save(entity);
             return entity.getRno();
-        }catch(Exception e) {
+        }catch(Exception e){
             throw new ReplyException(400);
         }
     }
 
     @Override
-    public ReplyReadDTO get(Long rno)throws ReplyException {
+    public ReplyReadDTO get(Long rno) throws ReplyException{
         ReplyReadDTO dto = replyRepository.selectOne(rno);
 
-        if(dto == null) {
+        if(dto == null){
             throw new ReplyException(404);
         }
 
@@ -46,14 +47,18 @@ public class ReplyServiceImpl implements ReplyService{
 
     @Override
     public PageResponseDTO<ReplyListDTO> getListOfBoard(Long bno, PageRequestDTO requestDTO) throws ReplyException {
-        PageResponseDTO<ReplyListDTO> responseDTO=
-                replyRepository.listQuerydsl(bno,requestDTO);
-        //이런식으로도 처리할 수는 있따.
-//        if(responseDTO.getDtoList()==null) {
-//            throw new ReplyException(404);
-//        }
+
+        PageResponseDTO<ReplyListDTO> responseDTO =
+            replyRepository.listQuerydsl(bno, requestDTO);
+
+        //이런식으로도 처리할 수는 있다.
+        //        if(responseDTO.getDtoList() == null){
+        //            throw new ReplyException(404);
+        //        }
+
         return responseDTO;
+
     }
-
-
 }
+
+

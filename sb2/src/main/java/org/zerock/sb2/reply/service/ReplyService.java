@@ -11,13 +11,13 @@ import org.zerock.sb2.reply.exception.ReplyException;
 
 public interface ReplyService {
 
-    Long add(ReplyAddDTO addDTO) throws ReplyException;
+    Long add(ReplyAddDTO addDTO)throws ReplyException;
 
-    ReplyReadDTO get(Long rno) throws ReplyException;
+    ReplyReadDTO get(Long rno)throws ReplyException;
 
     PageResponseDTO<ReplyListDTO> getListOfBoard(
             Long bno,
-            PageRequestDTO requestDTO) throws ReplyException;
+            PageRequestDTO requestDTO)throws ReplyException;
 
     default ReplyEntity dtoToEntity(ReplyAddDTO addDTO){
 

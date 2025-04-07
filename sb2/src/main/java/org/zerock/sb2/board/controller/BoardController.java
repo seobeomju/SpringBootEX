@@ -1,5 +1,6 @@
 package org.zerock.sb2.board.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;
@@ -39,10 +40,13 @@ public class BoardController {
   }
 
   @GetMapping("read/{bno}")
-  public String read(@ModelAttribute("bno") @PathVariable("bno") Long bno,
-                     PageRequestDTO requestDTO,
-                     Model model) {
-    return "board/read";
+  public String read( @ModelAttribute("bno") @PathVariable ("bno") Long bno,
+                      PageRequestDTO requestDTO,
+                      Model model){
+
+    //service 조회한 결과를 model에 담아야 함
+
+    return "/board/read";
   }
 
   @PostMapping("register")
@@ -53,27 +57,31 @@ public class BoardController {
     log.info(bindingResult);
 
     if(bindingResult.hasErrors()){
-      log.info("has errors..........");
-      
-      java.util.Map<String, String> errorMap = new HashMap<>();
 
+      log.info("has errors..........");
+
+      java.util.Map<String, String> errorMap = new HashMap<>();
+      
       bindingResult.getFieldErrors().forEach(fieldError -> {
         log.info("==========================");
         log.info("Field: " + fieldError.getField());  // 에러가 발생한 필드명
         log.info("Rejected Value: " + fieldError.getRejectedValue()); // 사용자가 입력한 잘못된 값
         log.info("Error Message: " + fieldError.getDefaultMessage()); // 에러 메시지
 
-        errorMap.put(fieldError.getField(),fieldError.getDefaultMessage());
-        rttr.addFlashAttribute("errors",errorMap);
+        errorMap.put(fieldError.getField(),fieldError.getDefaultMessage() );
 
-        
+        rttr.addFlashAttribute("errors", errorMap);
+
       });
+
       return "redirect:/board/register";
-    
-    }
+
+    }//end if
       
     return "redirect:/board/list";
   }
+  
+  
   
   
 }

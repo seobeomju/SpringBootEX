@@ -1,6 +1,5 @@
 package org.zerock.sb2.product.entities;
 
-
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +14,5 @@ public class ProductImage {
     private String imgName;
 
     private int ord;
+
 }

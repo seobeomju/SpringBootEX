@@ -58,7 +58,7 @@ public class ProductSearchImpl implements ProductSearch {
                 qProductImage.imgName.as("imgName"),
                 qProductReview.score.coalesce(0).avg().as("avgRating"),
                 qProductReview.count().as("reviewCnt")
-        ));
+                ));
 
         List<ProductListDTO> dtoList = dtoQuery.fetch();
         long total = dtoQuery.fetchCount();
@@ -132,3 +132,14 @@ public class ProductSearchImpl implements ProductSearch {
                 .build();
     }
 }
+
+
+
+
+
+
+
+
+
+
+

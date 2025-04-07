@@ -101,37 +101,41 @@ public class ReplyRepoTests {
   }
 
   @Test
-  public void testSelectOne(){
-    Long rno =1L;
+  public void testListOfBoardQuerydsl() {
 
-    ReplyReadDTO dto = repository.selectOne(rno);
-  
+    Long bno = 123L;
+
+    PageRequestDTO requestDTO = new PageRequestDTO(); //1, 10
+
+    PageResponseDTO<ReplyListDTO> res = repository.listQuerydsl(bno, requestDTO);
+
+    log.info(res);
+  }
+
+  @Test
+  public void testSelectOne() {
+
+    Long rno = 1L;
+
+    ReplyReadDTO dto =  repository.selectOne(rno);
+
     log.info(dto);
-  
+
   }
 
   @Test
   @Transactional
   @Commit
-  public void testUpdate(){
+  public void testUpdate() {
+
     Long rno = 1L;
     String text = "Reply 1 Updated....";
 
     repository.updateOne(text, rno);
 
+
   }
 
-    @Test
-   public void testListOfBoardQuerydsl() {
- 
-     Long bno = 123L;
- 
-     PageRequestDTO requestDTO = new PageRequestDTO(); //1, 10
- 
-     PageResponseDTO<ReplyListDTO> res = repository.listQuerydsl(bno, requestDTO);
- 
-     log.info(res);
-   }
- 
+
 
 }

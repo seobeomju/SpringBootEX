@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 @Data
 public class ProductReadDTO {
+
     private Long pno;
 
     private String pname;
@@ -17,11 +18,11 @@ public class ProductReadDTO {
 
     private List<String> imageNames;
 
-    public ProductReadDTO(ProductEntity entity){
+    public ProductReadDTO(ProductEntity entity) {
         this.pno = entity.getPno();
         this.pname = entity.getPname();
         this.price = entity.getPrice();
-        this.imageNames = entity.getImages().stream()
-                .map(pi -> pi.getImgName()).collect(Collectors.toList());
+        this.imageNames = entity.getImages().stream().map(pi -> pi.getImgName()).collect(Collectors.toList());
     }
+
 }

@@ -56,7 +56,7 @@ public class PageRequestDTO {
     	try {
 			buffer.append("&keyword="+URLEncoder.encode(keyword,"UTF-8"));
 		} catch (UnsupportedEncodingException e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
@@ -137,3 +137,12 @@ public class PageRequestDTO {
         this.size = size;
     }
 }
+
+
+
+
+
+
+
+
+

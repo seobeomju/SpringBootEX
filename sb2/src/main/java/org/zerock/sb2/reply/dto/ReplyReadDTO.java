@@ -10,26 +10,28 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ReplyReadDTO {
+ 
+  private Long rno;
 
-    private Long rno;
+  private String replyText;
 
-    private String  replyText;
+  private String replyer;
 
-    private String replyer;
+  private LocalDateTime regDate;
 
-    private LocalDateTime regDAte;
+  private LocalDateTime modDate;
 
-    private LocalDateTime modDate;
+  private Long bno;
 
-    private Long bno;
-    
-    public ReplyReadDTO(ReplyEntity entity){
-        this.rno = entity.getRno();
-        this.replyText = entity.getReplyText();
-        this.replyer = entity.getReplyer();
-        this.regDAte = entity.getRegDate();
-        this.modDate = entity.getModDate();
+  public ReplyReadDTO(ReplyEntity entity){
+    this.rno = entity.getRno();
+    this.replyText = entity.getReplyText();
+    this.replyer = entity.getReplyer();
+    this.regDate = entity.getRegDate();
+    this.modDate = entity.getModDate();
 
-        this.bno = entity.getBoard().getBno();
-    }
+    this.bno = entity.getBoard().getBno();
+  }
+
+  
 }

@@ -17,9 +17,11 @@ public class ReplyListDTO {
   private String replyer;
 
   private Long bno;
-  @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss")
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime regDate;
-  @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss")
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime modDate;
 
   public ReplyListDTO(Long rno, String replyText, String replyer, Long bno, LocalDateTime regDate,

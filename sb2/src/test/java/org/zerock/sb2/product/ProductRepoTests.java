@@ -154,9 +154,9 @@ public class ProductRepoTests {
         Page<ProductEntity> result = repo.findAll(pageable);
 
         result.forEach(product -> {
-            log.info("--------------------");
-            log.info(product);
-            log.info(product.getImages());
+          log.info("--------------------");
+          log.info(product);
+          log.info(product.getImages());
         } );
 
     }
@@ -178,3 +178,18 @@ public class ProductRepoTests {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

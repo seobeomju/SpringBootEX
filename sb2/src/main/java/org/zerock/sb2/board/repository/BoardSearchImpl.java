@@ -30,7 +30,8 @@ public class BoardSearchImpl implements BoardSearch {
     QReplyEntity reply = QReplyEntity.replyEntity;
 
     JPQLQuery<BoardEntity> query = queryFactory.selectFrom(board);
-    query.leftJoin(reply).on(reply.board.eq(board)); //레프트아우터 조인
+    query.leftJoin(reply).on(reply.board.eq(board));
+    
 
     query.where(board.bno.gt(0L));
     query.where(board.delFlag.eq(false));
@@ -56,8 +57,9 @@ public class BoardSearchImpl implements BoardSearch {
       query.where(builder);
 
     }//end if
-    
+
     query.groupBy(board);
+
 
     query.limit(pageRequestDTO.getLimit());
     query.offset(pageRequestDTO.getOffset());
@@ -70,9 +72,9 @@ public class BoardSearchImpl implements BoardSearch {
            board.title,
            board.writer, 
            board.regDate, 
-           board.viewCnt, 
-           reply.rno.count().as("replyCnt") 
-           ));
+           board.viewCnt,
+           reply.rno.count().as("replyCnt")
+            ));
 
     long count = dtoQuery.fetchCount();
     

@@ -43,7 +43,7 @@ public class BoardEntity {
   private int viewCnt;
 
 
-
+  
   @CreatedDate
   @Column(name = "regdate", updatable = false)
   protected LocalDateTime regDate;

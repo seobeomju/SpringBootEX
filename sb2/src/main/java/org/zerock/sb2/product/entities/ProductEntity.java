@@ -6,6 +6,7 @@ import org.hibernate.annotations.BatchSize;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_product")
@@ -25,21 +26,22 @@ public class ProductEntity {
 
     private int price;
 
-    @ElementCollection(fetch =  FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
             name = "tbl_product_img",
-            joinColumns = @JoinColumn(name="product_pno") )
+            joinColumns = @JoinColumn(name="product_pno"))
     @BatchSize(size = 20)
     @Builder.Default
-    private java.util.List<ProductImage> images = new ArrayList<>();
+    private List<ProductImage> images = new ArrayList<>();
 
-    public void addImage(String filename) {
+    public void addImage(String fileName) {
         ProductImage image = new ProductImage();
-        image.setImgName(filename);
+        image.setImgName(fileName);
         image.setOrd(images.size());
 
         images.add(image);
     }
+
     public void clearImages() {
         images.clear();
     }
