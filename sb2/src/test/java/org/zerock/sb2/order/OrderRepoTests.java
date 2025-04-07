@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.sb2.order.entities.OrderDetailEntity;
 import org.zerock.sb2.order.entities.OrderEntity;
@@ -134,10 +135,6 @@ public class OrderRepoTests {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("ono").descending());
 
         Page<OrderEntity> page = repo.listOfUserOrder(customer, pageable);
-
-        //page.get().forEach(orderEntity -> {log.info(orderEntity);});
-
-
         //15,14,13,12,11,....5
         java.util.List<Long> onos = page.stream().map(orderEntity -> orderEntity.getOno()).collect(Collectors.toUnmodifiableList());
 
@@ -154,6 +151,22 @@ public class OrderRepoTests {
             log.info("-----------------");
 
         });
+
+    }
+
+    @Transactional
+    @Commit
+    @Test
+    public void testDeleteDetail(){
+
+        Long odno = 42L;
+
+        OrderDetailEntity detailEntity = detailRepo.findById(odno).orElse(null);
+
+        if(detailEntity != null){
+            OrderEntity orderEntity = detailEntity.getOrder();
+            orderEntity.removeDetail(detailEntity);
+        }
 
     }
 

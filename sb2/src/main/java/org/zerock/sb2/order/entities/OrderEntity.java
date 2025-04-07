@@ -39,4 +39,11 @@ public class OrderEntity {
         details.add(detail);
 
     }
+
+    public void removeDetail(OrderDetailEntity detail) {
+
+        details.remove(detail);
+        detail.setOrderEntity(null);
+
+    }
 }
