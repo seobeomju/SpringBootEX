@@ -1,5 +1,6 @@
 package org.zerock.sb2.product.repository;
 
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
@@ -84,8 +85,16 @@ public class ProductSearchImpl implements ProductSearch {
         query.offset(pageRequestDTO.getOffset());
         query.orderBy(new OrderSpecifier<>(Order.DESC, qProductEntity.pno));
 
-        query.fetch();
 
+        //Tuple = (title,content,writer)
+        JPQLQuery<Tuple> tupleQuery = query.select(
+                qProductEntity.pno,
+                qProductEntity.pname,
+                qProductEntity.price,
+                qProductReview.score.coalesce(0).avg().as("avgRating"),
+                qProductReview.count().as("reviewCnt"));
+
+        tupleQuery.fetch();
         return null;
     }
 }
