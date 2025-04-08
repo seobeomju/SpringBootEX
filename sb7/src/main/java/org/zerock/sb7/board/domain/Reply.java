@@ -2,6 +2,7 @@ package org.zerock.sb7.board.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 @Entity
 @Getter
