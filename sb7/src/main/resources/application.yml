@@ -31,6 +31,7 @@ spring:
 #?? ??
 logging:
   level:
-    org.zerock.sb7: INFO
+    org.zerock: INFO
+    org.springframework.security: TRACE
 
 
