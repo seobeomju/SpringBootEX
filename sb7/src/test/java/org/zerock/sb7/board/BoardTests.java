@@ -77,7 +77,7 @@ public class BoardTests {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
 
         //1페이지에 해당하는 Board 들만 추출
-        Page<Object[]> pagingResult = boardRepo.listofPage(pageable);
+        Page<Object[]> pagingResult = boardRepo.listOfPage(pageable);
 
         //bno만 추출
         List<Integer> bnos = pagingResult.stream()
@@ -91,7 +91,12 @@ public class BoardTests {
 
         replies.forEach(arr -> {
             log.info("------------------");
-            log.info(Arrays.toString(arr));
+            Reply reply = (Reply) arr[0];
+            Board board = (Board) arr[1];
+
+            log.info(board);
+            log.info(board.getImages());
+
         });
     }
 }
