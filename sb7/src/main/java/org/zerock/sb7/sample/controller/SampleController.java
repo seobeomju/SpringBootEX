@@ -2,6 +2,8 @@ package org.zerock.sb7.sample.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,11 @@ public class SampleController {
     //isAuthenticated()
     @PreAuthorize("isAuthenticated()")
     @GetMapping("ex2")
-    public void ex2(){
+    public void ex2(@AuthenticationPrincipal UserDetails userDetails){
         log.info("ex2");
+        log.info("----------------");
+        log.info(userDetails.getUsername());
+        log.info(userDetails.getAuthorities());
     }
 
     @PreAuthorize("hasRole('ADMIN')")
