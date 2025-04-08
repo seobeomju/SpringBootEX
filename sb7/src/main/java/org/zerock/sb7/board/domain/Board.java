@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@ToString(exclude = "images")
+@ToString(exclude = {"images","tags"})
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,6 +26,11 @@ public class Board {
     @ElementCollection(fetch = FetchType.LAZY)
     @BatchSize(size = 100)
     private List<BoardImage> images = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @BatchSize(size = 100)
+    private List<String> tags = new ArrayList<>();
+
 
     public void addImage(String fileName){
         BoardImage image = new BoardImage();
