@@ -99,4 +99,11 @@ public class BoardTests {
             log.info(board.getTags());
         });
     }
+
+    @Test
+    public void testQuerydsl(){
+
+        boardRepo.search();
+
+    }
 }
