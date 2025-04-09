@@ -3,6 +3,7 @@ package org.zerock.sb7.board.repo.search;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.JPQLQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.zerock.sb7.board.domain.*;
+import org.zerock.sb7.board.dto.BoardListDTO;
 import org.zerock.sb7.board.repo.BoardRepo;
 
 import java.util.List;
@@ -52,19 +54,30 @@ public class BoardSearchImpl implements BoardSearch {
         query.offset(offset);
         query.orderBy(new OrderSpecifier<>(Order.DESC, board.bno));
 
-        JPQLQuery<Tuple> listTuqleQuery = query.select(
-                board.bno, board.title, board.writer, boardImage.fileName,
-                favorite.choice.eq(Choice.LIKE), reply.countDistinct());
+        //count( ) 함수는 long 타입
+
+        JPQLQuery<BoardListDTO> dtoQuery = query.select(
+                Projections.bean(BoardListDTO.class,
+                        board.bno,
+                        board.title,
+                        board.writer,
+                        boardImage.fileName,
+                        favorite.choice.eq(Choice.LIKE).countDistinct().as("favoriteCount"),
+                        reply.countDistinct().as("replyCount")
+                )
+        );
+
+        log.info(dtoQuery.fetch());
 
 
-        log.info("----------------------------");
-
-        List<Tuple> results = listTuqleQuery.fetch();
-
-        List<Integer> bnos =
-                results.stream().map(tuple -> tuple.get(0, Integer.class)).collect(Collectors.toUnmodifiableList());
-
-
-        log.info("Found {} boards", bnos);
+        //
+        //        log.info("----------------------------");
+        //
+        //        List<Tuple> results = listTuqleQuery.fetch();
+        //
+        //        List<Integer> bnos =
+        //                results.stream().map(tuple -> tuple.get(0, Integer.class)).collect(Collectors.toUnmodifiableList());
+        //
+        //        log.info("Found {} boards", bnos);
     }
 }
