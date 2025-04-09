@@ -25,10 +25,13 @@ public class Board {
 
     @ElementCollection(fetch = FetchType.LAZY)
     @BatchSize(size = 100)
+    @Builder.Default
     private List<BoardImage> images = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name="board_tags",joinColumns = @JoinColumn(name = "board_bno"))
     @BatchSize(size = 100)
+    @Builder.Default
     private List<String> tags = new ArrayList<>();
 
 
