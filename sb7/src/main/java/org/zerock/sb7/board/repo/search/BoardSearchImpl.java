@@ -13,6 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.zerock.sb7.board.domain.*;
 import org.zerock.sb7.board.repo.BoardRepo;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Log4j2
 @RequiredArgsConstructor
 public class BoardSearchImpl implements BoardSearch {
@@ -55,10 +58,13 @@ public class BoardSearchImpl implements BoardSearch {
 
 
         log.info("----------------------------");
-        listTuqleQuery.fetch();
+
+        List<Tuple> results = listTuqleQuery.fetch();
+
+        List<Integer> bnos =
+                results.stream().map(tuple -> tuple.get(0, Integer.class)).collect(Collectors.toUnmodifiableList());
 
 
-
-
+        log.info("Found {} boards", bnos);
     }
 }
