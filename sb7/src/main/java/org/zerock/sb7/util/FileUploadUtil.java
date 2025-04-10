@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -55,6 +56,16 @@ public class FileUploadUtil {
                 //FileCopyUtils.copy(file.getBytes(), path.toFile());
                 Files.copy(file.getInputStream(), path);
 
+                String contentType = file.getContentType();
+
+                if(contentType != null && contentType.startsWith("image")){ //이미지여부 확인
+
+                    Path thumbnailPath = Paths.get(uploadDir, "s_"+saveFileName);
+
+                    Thumbnails.of(path.toFile())
+                            .size(400,400)
+                            .toFile(thumbnailPath.toFile());
+                }
                 uploadedFileNames.add(saveFileName);
 
             }//end for
