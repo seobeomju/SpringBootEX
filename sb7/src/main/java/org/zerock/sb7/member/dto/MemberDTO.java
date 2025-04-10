@@ -36,10 +36,12 @@ public class MemberDTO implements UserDetails, OAuth2User {
 
     }
 
+    //소셜 로그인시에 사용
     public MemberDTO(String email, String mpw){
         this.mid=email;
         this.mpw=mpw;
         this.email=email;
+        this.social=true;
         this.roleNames = List.of("USER");
     }
 
