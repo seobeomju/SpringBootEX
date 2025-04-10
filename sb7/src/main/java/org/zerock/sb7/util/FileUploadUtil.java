@@ -100,5 +100,25 @@ public class FileUploadUtil {
         return ResponseEntity.ok().headers(headers).body(resource);
     }
 
+    public void deleteFile(String fileName) {
+
+        try{
+            File originalFile = new File(uploadDir+ File.separator + fileName);
+            originalFile.delete();
+        }catch(Exception e){
+            //e.printStackTrace(); //사용금지
+            log.error(e.getMessage());
+        }
+        try{
+            File thumbFile = new File(uploadDir+ File.separator + "s_" + fileName);
+            thumbFile.delete();
+        }catch(Exception e){
+            //e.printStackTrace(); //사용금지
+            log.error(e.getMessage());
+        }
+
+    }
+
+
 
 }
