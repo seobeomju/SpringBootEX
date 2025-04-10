@@ -57,7 +57,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         log.info("email: " + email);
 
-        //MemberRepo에서 mid값이 email 회원 정보를 찾아옴 social값은 false
+        //MemberRepo에서 mid값이 email 회원 정보를 찾아옴
         Member memeber = memberRepo.selectOne(email);
 
         //없다면
@@ -71,6 +71,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                     .roleSet(Set.of(MemberRole.USER))
                     .build();
             memberRepo.save(newbie);
+            memeber = newbie;
             //이 때 password는 1111을 인코딩해서 넣음
 
             //권한은 USER 권한만 부여
@@ -78,11 +79,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             //social값은 true
         }
 
-
-        String password = passwordEncoder.encode("1111");
-
         //회원을 의미하는 MemberDTO를 반환하도록 수정
-        MemberDTO memberDTO = new MemberDTO(email,password);
+        MemberDTO memberDTO = new MemberDTO(memeber);
 
         return memberDTO;
     }
